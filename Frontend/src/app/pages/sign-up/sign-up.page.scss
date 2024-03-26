@@ -1,0 +1,48 @@
+ion-content {
+  --background: url("../../../assets/images/signInBackground.jpg") 0 0/100% 100%
+    no-repeat;
+}
+
+ion-col,
+ion-list {
+  background-color: rgb(241, 238, 238);
+  height: 70%;
+}
+
+.card {
+  height: 100vh;
+}
+
+.signInCard {
+  position: fixed;
+  width: 100%;
+  top: 20%;
+}
+
+.inputStyle {
+  margin-top: 20px;
+}
+
+.forgetStyle {
+  margin-top: 10px;
+}
+
+.SignUpButton {
+  margin-top: 30px;
+}
+
+.registerMargin {
+  margin-top: 20px;
+}
+
+.loginMargin {
+  margin-top: 50px;
+  font-size: 50px;
+  font-family: "Shrikhand", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+ion-checkbox {
+  --size: 15px;
+}

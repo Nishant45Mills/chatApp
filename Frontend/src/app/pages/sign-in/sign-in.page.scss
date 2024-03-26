@@ -1,0 +1,45 @@
+ion-content {
+  --background: url("../../../assets/images/signInBackground.jpg") 0 0/100% 100%
+    no-repeat;
+}
+
+ion-col,
+ion-list {
+  background-color: rgb(241, 238, 238);
+  height: 50%;
+}
+
+ion-row {
+  height: 100vh;
+}
+
+ion-grid {
+  position: fixed;
+  width: 100%;
+  top: 30%;
+}
+
+.inputStyle {
+  margin-top: 20px;
+}
+
+.forgetStyle {
+  margin-top: 10px;
+}
+
+.SignInButton {
+  margin-top: 30px;
+}
+
+.registerMargin {
+  margin-top: 40px;
+}
+
+.loginMargin {
+
+  margin-top: 80px;
+  font-size: 50px;
+  font-family: "Shrikhand", serif;
+  font-weight: 500;
+  font-style: normal;
+}
