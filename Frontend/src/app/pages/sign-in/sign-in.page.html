@@ -3,51 +3,57 @@
     <div class="loginMargin">Login</div>
   </ion-text>
   <ion-grid>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="10" class="ion-padding">
-        <div class="formStyle">
-          <ion-list lines="none">
-            <ion-item style="margin-top: 30px">
-              <ion-input
-                label="Email"
-                labelPlacement="floating"
-                placeholder="Enter Email"
-              >
-              </ion-input>
-            </ion-item>
+    <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm(loginForm)">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10" class="ion-padding">
+          <div class="formStyle">
+            <ion-list lines="none">
+              <ion-item style="margin-top: 30px">
+                <ion-input
+                  label="Email"
+                  labelPlacement="floating"
+                  placeholder="Enter Email"
+                  formControlName="email"
+                >
+                </ion-input>
+              </ion-item>
 
-            <ion-item style="margin-top: 30px">
-              <ion-input
-                label="Password"
-                labelPlacement="floating"
-                placeholder="Enter Password"
-                type="Password"
-              >
-              </ion-input>
-              <i
-                class="fa-solid fa-eye"
-                style="color: #000000; cursor: pointer"
-              ></i>
-            </ion-item>
-          </ion-list>
+              <ion-item style="margin-top: 30px">
+                <ion-input
+                  label="Password"
+                  labelPlacement="floating"
+                  placeholder="Enter Password"
+                  type="Password"
+                  formControlName="password"
+                >
+                </ion-input>
+                <i
+                  class="fa-solid fa-eye"
+                  style="color: #000000; cursor: pointer"
+                ></i>
+              </ion-item>
+            </ion-list>
 
-          <ion-button expand="block" class="SignInButton">Sign In</ion-button>
+            <ion-button expand="block" type="submit" class="SignInButton"
+              >Sign In</ion-button
+            >
 
-          <ion-text color="primary" class="ion-text-center">
-            <div class="forgetStyle">Forgot password?</div>
-          </ion-text>
+            <ion-text color="primary" class="ion-text-center">
+              <div class="forgetStyle">Forgot password?</div>
+            </ion-text>
 
-          <ion-text class="ion-text-center">
-            <div class="registerMargin">
-              Don't have an account?<ion-text
-                color="primary"
-                routerLink="/sign-up"
-                >Register Now</ion-text
-              >
-            </div>
-          </ion-text>
-        </div>
-      </ion-col>
-    </ion-row>
+            <ion-text class="ion-text-center">
+              <div class="registerMargin">
+                Don't have an account?<ion-text
+                  color="primary"
+                  routerLink="/sign-up"
+                  >Register Now</ion-text
+                >
+              </div>
+            </ion-text>
+          </div>
+        </ion-col>
+      </ion-row>
+    </form>
   </ion-grid>
 </ion-content>

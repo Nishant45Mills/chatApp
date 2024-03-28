@@ -2,123 +2,131 @@
   <ion-text class="ion-text-center">
     <div class="loginMargin">Register</div>
   </ion-text>
-  <ion-grid class="signInCard">
-    <ion-row class="ion-justify-content-center card">
-      <ion-col size="10" class="ion-padding">
-        <div class="formStyle">
-          <ion-list lines="none">
-            <ion-item style="margin-top: 30px">
-              <ion-input
-                label="Name"
-                labelPlacement="floating"
-                placeholder="Enter Name"
-              >
-              </ion-input>
-            </ion-item>
-            <ion-item style="margin-top: 30px">
-              <ion-input
-                label="Email"
-                labelPlacement="floating"
-                placeholder="Enter Email"
-              >
-              </ion-input>
-            </ion-item>
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit(signUpForm)">
+    <ion-grid class="signInCard">
+      <ion-row class="ion-justify-content-center card">
+        <ion-col size="10" class="ion-padding">
+          <div class="formStyle">
+            <ion-list lines="none">
+              <ion-item style="margin-top: 30px">
+                <ion-input
+                  label="Name"
+                  labelPlacement="floating"
+                  placeholder="Enter Name"
+                  formControlName="name"
+                >
+                </ion-input>
+              </ion-item>
+              <ion-item style="margin-top: 30px">
+                <ion-input
+                  label="Email"
+                  labelPlacement="floating"
+                  placeholder="Enter Email"
+                  formControlName="email"
+                >
+                </ion-input>
+              </ion-item>
 
-            <ion-item style="margin-top: 30px">
-              <ion-input
-                label="Password"
-                labelPlacement="floating"
-                placeholder="Enter Password"
-                type="Password"
-              >
-              </ion-input>
-              <i
-                class="fa-solid fa-eye"
-                style="color: #000000; cursor: pointer"
-              ></i>
-            </ion-item>
-          </ion-list>
+              <ion-item style="margin-top: 30px">
+                <ion-input
+                  label="Password"
+                  labelPlacement="floating"
+                  placeholder="Enter Password"
+                  type="Password"
+                  formControlName="password"
+                >
+                </ion-input>
+                <i
+                  class="fa-solid fa-eye"
+                  style="color: #000000; cursor: pointer"
+                ></i>
+              </ion-item>
+            </ion-list>
 
-          <ion-text class="ion-text-center">
-            <div style="margin-top: 10px">
-              <ion-checkbox labelPlacement="end">
-                Agree with terms and condition
-              </ion-checkbox>
-            </div>
-          </ion-text>
+            <ion-text class="ion-text-center">
+              <div style="margin-top: 10px">
+                <ion-checkbox labelPlacement="end" formControlName="acceptTerms">
+                  Agree with terms and condition
+                </ion-checkbox>
+              </div>
+            </ion-text>
 
-          <ion-button expand="block" class="SignUpButton">Sign Up</ion-button>
-
-          <ion-grid>
-            <ion-row
-              class="ion-justify-content-center ion-margin-top"
-              column-gap="medium"
+            <ion-button expand="block" class="SignUpButton" type="submit"
+              >Sign Up</ion-button
             >
-              <ion-col size="3" class="social">
-                <div
-                  style="
-                    border: 1px solid rgb(202, 202, 202);
-                    border-radius: 50%;
-                    width: 60px;
-                    height: 60px;
-                    padding: 8px;
-                    margin: 0 auto;
-                  "
-                >
-                  <ion-img
-                    src="../../../assets/images/icons8-google-48.png"
-                    style="height: 40px"
-                  ></ion-img>
-                </div>
-              </ion-col>
-              <ion-col size="3" class="social">
-                <div
-                  style="
-                    border: 1px solid rgb(202, 202, 202);
-                    border-radius: 50%;
-                    padding: 8px;
-                    width: 60px;
-                    height: 60px;
-                    margin: 0 auto;
-                  "
-                >
-                  <ion-img
-                    src="../../../assets/images/icons8-facebook-48.png"
-                    style="height: 40px"
-                  ></ion-img>
-                </div>
-              </ion-col>
-              <ion-col size="3" class="social">
-                <div
-                  style="
-                    border: 1px solid rgb(202, 202, 202);
-                    border-radius: 50%;
-                    padding: 8px;
-                    width: 60px;
-                    height: 60px;
-                    margin: 0 auto;
-                  "
-                >
-                  <ion-img
-                    src="../../../assets/images/icons8-twitter-48.png"
-                    style="height: 40px"
-                  ></ion-img>
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
 
-          <ion-text class="ion-text-center">
-            <div class="registerMargin">
-              Already have an account?<ion-text
-                color="primary"
-                routerLink="/sign-in"
-                > Login</ion-text
+            <ion-grid>
+              <ion-row
+                class="ion-justify-content-center ion-margin-top"
+                column-gap="medium"
               >
-            </div>
-          </ion-text>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+                <ion-col size="3" class="social">
+                  <div
+                    style="
+                      border: 1px solid rgb(202, 202, 202);
+                      border-radius: 50%;
+                      width: 60px;
+                      height: 60px;
+                      padding: 8px;
+                      margin: 0 auto;
+                    "
+                  >
+                    <ion-img
+                      src="../../../assets/images/icons8-google-48.png"
+                      style="height: 40px"
+                    ></ion-img>
+                  </div>
+                </ion-col>
+                <ion-col size="3" class="social">
+                  <div
+                    style="
+                      border: 1px solid rgb(202, 202, 202);
+                      border-radius: 50%;
+                      padding: 8px;
+                      width: 60px;
+                      height: 60px;
+                      margin: 0 auto;
+                    "
+                  >
+                    <ion-img
+                      src="../../../assets/images/icons8-facebook-48.png"
+                      style="height: 40px"
+                    ></ion-img>
+                  </div>
+                </ion-col>
+                <ion-col size="3" class="social">
+                  <div
+                    style="
+                      border: 1px solid rgb(202, 202, 202);
+                      border-radius: 50%;
+                      padding: 8px;
+                      width: 60px;
+                      height: 60px;
+                      margin: 0 auto;
+                    "
+                  >
+                    <ion-img
+                      src="../../../assets/images/icons8-twitter-48.png"
+                      style="height: 40px"
+                    ></ion-img>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-text class="ion-text-center">
+              <div class="registerMargin">
+                Already have an account?<ion-text
+                  color="primary"
+                  routerLink="/sign-in"
+                >
+                  Login</ion-text
+                >
+              </div>
+            </ion-text>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

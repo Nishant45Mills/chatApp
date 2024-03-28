@@ -22,21 +22,26 @@ const register = catchAsync(async (req, res) => {
     password,
   });
 
-  user.password = undefined;
   const token = await tokenService.generateToken(user);
+  user.password = undefined;
 
   res.json({ user, token });
 });
 
-// const login = catchAsync(async (req, res) => {
-//   const { email, password } = req.body;
+const login = catchAsync(async (req, res) => {
+  const { email, password } = req.body;
+  const userExist = await userModel.findOne({ email });
 
-//   const userExist = await userModel({ email });
+  if (!userExist || !(await userExist.matchPassword(password))) {
+    throw new ApiError("Incorrect email or password", 400);
+  }
 
-//   if (userExist || userExist.matchPassword(password)) {
+  const token = await tokenService.generateToken(userExist);
+  userExist.password = undefined;
 
-//     console.log("correct");
-// }
-// });
+res.cookie( "token", token).json({message:"Login successFully"});
 
-module.exports = { register };
+  // res.json({ user: userExist, accessToken: token });
+});
+
+module.exports = { register, login };

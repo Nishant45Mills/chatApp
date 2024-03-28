@@ -33,7 +33,6 @@ userModel.pre("save", async function (next) {
   if (!this.isModified("password")) next();
   try {
     const salt = await bcrypt.genSalt(10);
-    console.log(salt);
     this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (error) {
@@ -41,8 +40,9 @@ userModel.pre("save", async function (next) {
   }
 });
 
-userModel.methods.matchPassword = async (enterPassword) => {
-  return await bcrypt.compare(enterPassword, this.password);
+userModel.methods.matchPassword = async function (enterPassword) {
+  const user = this;
+  return bcrypt.compare(enterPassword, user.password);
 };
 
 module.exports = mongoose.model("User", userModel);

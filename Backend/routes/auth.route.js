@@ -1,7 +1,8 @@
 const express = require("express");
-const { signUp, auth } = require("../controllers");
+const { auth } = require("../controllers");
 const app = express();
 
 app.post("/register", auth.register);
+app.post("/login",auth.login);
 
 module.exports = app;
