@@ -45,15 +45,19 @@
 
             <ion-text class="ion-text-center">
               <div style="margin-top: 10px">
-                <ion-checkbox labelPlacement="end" formControlName="acceptTerms">
+                <ion-checkbox
+                  labelPlacement="end"
+                  formControlName="acceptTerms"
+                >
                   Agree with terms and condition
                 </ion-checkbox>
               </div>
             </ion-text>
 
-            <ion-button expand="block" class="SignUpButton" type="submit"
-              >Sign Up</ion-button
-            >
+            <ion-button expand="block" class="SignUpButton" type="submit">
+              <span *ngIf="!loading">Sign Up</span>
+              <ion-spinner *ngIf="loading" name="lines-small"></ion-spinner>
+            </ion-button>
 
             <ion-grid>
               <ion-row

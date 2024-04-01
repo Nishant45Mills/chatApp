@@ -24,9 +24,9 @@ app.use("/", routes);
 app.use(errorHandler);
 
 //get chat list
-// app.get("/chat", (req, res) => {
-//   res.json(chats);
-// });
+app.get("/chat", (req, res) => {
+  res.json(chats);
+});
 
 // //get single chat detail
 // app.get("/chat/:id", (req, res) => {

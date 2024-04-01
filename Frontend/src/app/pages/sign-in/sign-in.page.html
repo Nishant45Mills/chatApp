@@ -35,7 +35,10 @@
             </ion-list>
 
             <ion-button expand="block" type="submit" class="SignInButton"
-              >Sign In</ion-button
+              >
+              <span *ngIf="!loading">Sign In</span>
+              <ion-spinner *ngIf="loading" name="lines-small"></ion-spinner>
+              </ion-button
             >
 
             <ion-text color="primary" class="ion-text-center">

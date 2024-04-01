@@ -9,6 +9,7 @@ import { HttpService } from 'src/app/services/http.service';
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage implements OnInit {
+  loading: boolean = false;
   signUpForm = this.fb.group({
     name: [''],
     email: [''],
@@ -25,9 +26,13 @@ export class SignUpPage implements OnInit {
   ngOnInit() {}
 
   onSubmit(formData: any) {
+    this.loading = true;
     this.http.post('/auth/register', formData.value).subscribe({
       next: (data) => {
-        this.route.navigateByUrl('/sign-in');
+        setTimeout(() => {
+          this.loading = false;
+          this.route.navigateByUrl('/sign-in');
+        }, 1000);
       },
       error: (error) => {
         console.log(error);

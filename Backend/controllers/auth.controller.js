@@ -38,10 +38,8 @@ const login = catchAsync(async (req, res) => {
 
   const token = await tokenService.generateToken(userExist);
   userExist.password = undefined;
-
-res.cookie( "token", token).json({message:"Login successFully"});
-
-  // res.json({ user: userExist, accessToken: token });
+  res.setHeader("Set-Cookie", `success=${token}`);
+  res.json({ user: userExist, accessToken: token });
 });
 
 module.exports = { register, login };
