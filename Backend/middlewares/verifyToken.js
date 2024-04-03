@@ -4,10 +4,7 @@ const catchAsync = require("../util/catchAsync");
 const jwt = require("jsonwebtoken");
 
 const verifyToken = catchAsync(async (req, res, next) => {
-  let authToken = req.headers.authorization;
-  let tokenInfo = authToken.split(" ");
-  let tokenType = tokenInfo[0];
-  let token = tokenInfo[1];
+  let token = req.headers.authorization.split(" ")[1];
 
   jwt.verify(token, process.env.JWT_SECRATE_KEY, async (err, decode) => {
     if (err) {

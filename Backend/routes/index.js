@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const authRoute = require("./auth.route");
 const userRoute = require("./user.route");
+const chatRoute = require("./chat.route");
 
 const routes = [
   {
@@ -11,6 +12,10 @@ const routes = [
   {
     path: "/user",
     route: userRoute,
+  },
+  {
+    path: "/chat",
+    route: chatRoute,
   },
 ];
 

@@ -38,7 +38,6 @@ const login = catchAsync(async (req, res) => {
 
   const token = await tokenService.generateToken(userExist);
   userExist.password = undefined;
-  res.setHeader("Set-Cookie", `success=${token}`);
   res.json({ user: userExist, accessToken: token });
 });
 

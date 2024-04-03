@@ -4,21 +4,22 @@ const catchAsync = require("../util/catchAsync");
 
 const getUser = catchAsync(async (req, res) => {
   const user = await userModel.find({
-    $or: [
-      { name: { $regex: req.query.search, $options: "i" } },
-      { email: { $regex: req.query.search, $options: "i" } },
+    $and: [
+      {
+        $or: [
+          { name: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
+        ],
+      },
+      { _id: { $ne: req.user._id } },
     ],
-    $ne: { _id: req.user._id },
   });
 
-  user.password = undefined;
-  console.log(user);
+  user.forEach((data) => {
+    data.password = undefined;
+  });
 
-//   const users = user.filter((data) => {
-//     return data["_id"] !== req.user._id;
-//   });
-  //   res.json(user);
-//   console.log(users);
+  res.json(user);
 });
 
 module.exports = { getUser };
