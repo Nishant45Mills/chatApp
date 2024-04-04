@@ -6,36 +6,59 @@ const catchAsync = require("../util/catchAsync");
 const createChat = catchAsync(async (req, res) => {
   const { userId } = req.body;
 
-const user = await chatModel.findOne({
+  const isChat = await chatModel
+    .findOne({
+      isGroupChat: false,
+      $and: [
+        { users: { $elemMatch: { $eq: req.user._id } } },
+        { users: { $elemMatch: { $eq: userId } } },
+      ],
+    })
+    .populate("users", "-password")
+    .populate("latestMessage");
+  if (isChat) {
+    res.json(isChat);
+  } else {
+    const chat = {
+      chatName: "sender",
+      isGroupChat: false,
+      users: [req.user._id, userId],
+    };
 
-    isGroupChat:false,
-    $and:[
-        {users:{$elemMatch:{$eq:req.user._id}}},
-        {users:{$elemMatch:{$eq:userId}}}
-    ]
-}).populate('users','-password').populate('latestMessage')
-
-console.log(user);
-
-//   const chat = {
-//     chatName: "sender",
-//     isGroupChat: false,
-//     users: [req.user._id, userId],
-//   };
-
-//   const createdChat = await chatModel.create(chat);
-//   const fetchChat = await chatModel
-//     .findOne({ _id: createdChat["_id"] })
-//     .populate("users", "_id name email pic");
-//   res.json(fetchChat);
+    const createdChat = await chatModel.create(chat);
+    const fetchChat = await chatModel
+      .findOne({ _id: createdChat["_id"] })
+      .populate("users", "_id name email pic");
+    res.json(fetchChat);
+  }
 });
 
-const fetchChat = catchAsync((req, res) => {
-  res.send("fetch chatss");
+const fetchChat = catchAsync(async (req, res) => {
+  const fetchingChats = await chatModel
+    .findOne({ users: { $elemMatch: { $eq: req.user._id } } })
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password")
+    .populate("latestMessage");
+  res.json(fetchingChats);
 });
 
-const createGroupChat = catchAsync((req, res) => {
-  res.send("group created");
+const createGroupChat = catchAsync(async (req, res) => {
+  const { chatName, user } = req.body;
+
+  user.push(req.user._id);
+  const chat = {
+    chatName: chatName,
+    isGroupChat: true,
+    users: user,
+    groupAdmin: req.user._id,
+  };
+
+  const group = await chatModel.create(chat);
+  const groupChat = await chatModel
+    .findOne({ _id: group._id })
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password");
+  res.json(groupChat);
 });
 
 const renameGroup = catchAsync((req, res) => {
