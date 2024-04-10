@@ -61,16 +61,47 @@ const createGroupChat = catchAsync(async (req, res) => {
   res.json(groupChat);
 });
 
-const renameGroup = catchAsync((req, res) => {
-  res.send("rename group name");
+const renameGroup = catchAsync(async (req, res) => {
+  const { chatName } = req.body;
+  const renameGroup = await chatModel
+    .findByIdAndUpdate(
+      req.params.id,
+      {
+        chatName,
+      },
+      { new: true }
+    )
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password");
+  res.json(renameGroup);
 });
 
-const removeFromGroup = catchAsync((req, res) => {
-  res.send("remove user from group");
+const removeFromGroup = catchAsync(async (req, res) => {
+  const { userId } = req.body;
+  const groupData = await chatModel
+    .findByIdAndUpdate(
+      req.params.id,
+      { $pull: { users: userId } },
+      { new: true }
+    )
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password");
+
+  res.json(groupData);
 });
 
-const addToGroup = catchAsync((req, res) => {
-  res.send("add user to the group");
+const addToGroup = catchAsync(async (req, res) => {
+  const { userId } = req.body;
+
+  const groupData = await chatModel
+    .findByIdAndUpdate(
+      req.params.id,
+      { $push: { users: userId } },
+      { new: true }
+    )
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password");
+  res.json(groupData);
 });
 
 module.exports = {
