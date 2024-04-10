@@ -1,0 +1,8 @@
+.search-container {
+    overflow: hidden;
+    transition: height 0.3s ease;
+  }
+  
+  .expanded {
+    height: 200px; /* Define your desired expanded height */
+  }

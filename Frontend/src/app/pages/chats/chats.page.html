@@ -1,15 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>chats</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">chats</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-margin-top">
+      <ion-col size="11" style="border: 1px solid red" style="display: flex;justify-content: space-between;align-items: center;">
+        <div>
+          <ion-icon name="menu-outline" style="color: #3c88ec;font-size: 40px;"></ion-icon>
+        </div>
 
-  <h4 *ngFor="let data of chat">{{data.chatName}}</h4>
+            <ion-searchbar #search animated="true" placeholder="Search user" style="height: 30px;"></ion-searchbar>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="11">
+
+        <ion-list class="ion-margin-top">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+            </ion-thumbnail>
+            <ion-label>Item</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

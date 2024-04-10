@@ -12,7 +12,7 @@ const routes: Routes = [
 
   {
     path: 'chat',
-    canActivate: [ProfileGuard],
+    // canActivate: [ProfileGuard],
     loadChildren: () =>
       import('./tabs/tabs.module').then((m) => m.TabsPageModule),
   },
