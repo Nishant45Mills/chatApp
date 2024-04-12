@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http.service';
+import { LocalService } from 'src/app/services/local.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -18,7 +19,8 @@ export class SignInPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpService,
-    private route: Router
+    private route: Router,
+    private tokenService: LocalService
   ) {}
 
   ngOnInit() {}
@@ -27,12 +29,12 @@ export class SignInPage implements OnInit {
     this.loading = true;
     this.http.post('/auth/login', formData.value).subscribe({
       next: (data: any) => {
-        localStorage.setItem('token', data['accessToken']);
+        this.tokenService.set('token',data['accessToken']);
+        
         setTimeout(() => {
           this.loading = false;
           this.route.navigateByUrl('/chat');
         }, 1000);
-        console.log(data);
       },
     });
     this.loginForm.reset();

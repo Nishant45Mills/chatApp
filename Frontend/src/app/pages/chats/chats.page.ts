@@ -1,40 +1,56 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, viewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  viewChild,
+} from '@angular/core';
+import { Router } from '@angular/router';
 import { AnimationController, IonSearchbar } from '@ionic/angular';
 import type { Animation } from '@ionic/angular';
-
+import { HttpService } from 'src/app/services/http.service';
+import { LocalService } from 'src/app/services/local.service';
 
 @Component({
   selector: 'app-chats',
   templateUrl: './chats.page.html',
   styleUrls: ['./chats.page.scss'],
 })
-export class ChatsPage implements OnInit,AfterViewInit {
+export class ChatsPage implements OnInit, AfterViewInit {
   chat: any;
-  status = false;
 
-  constructor(private http: HttpClient,private animationController:AnimationController) {}
-
-  isSearchExpanded: boolean = false;
-
-  toggleSearch() {
-    this.isSearchExpanded = !this.isSearchExpanded;
-  }
+  constructor(
+    private http: HttpService,
+    private animationController: AnimationController,
+    private tokenService: LocalService,
+    private route: Router
+  ) {}
 
   ngOnInit() {
     this.fetchChats();
   }
 
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewInit(): void {}
 
   fetchChats() {
-    this.http.get('http://localhost:3000/chat').subscribe((data) => {
-      this.chat = data;
+    this.http.get('/chat').subscribe({
+      next: (data) => {
+        this.chat = data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
-  play() {
-    this.status = true;
+  openBox() {
+    console.log('hello');
+  }
+
+  logOut() {
+    this.tokenService.remove();
+    this.route.navigate(['']);
   }
 }

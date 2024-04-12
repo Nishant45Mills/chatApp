@@ -7,12 +7,13 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { LocalService } from '../services/local.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private myRoute: Router) {}
+  constructor(private myRoute: Router, private tokenService: LocalService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -22,7 +23,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (localStorage.getItem('token')) {
+    if (this.tokenService.get()) {
       this.myRoute.navigateByUrl('/chat');
       return false;
     } else {

@@ -1,8 +1,57 @@
 .search-container {
-    overflow: hidden;
-    transition: height 0.3s ease;
-  }
-  
-  .expanded {
-    height: 200px; /* Define your desired expanded height */
-  }
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.expanded {
+  height: 200px; /* Define your desired expanded height */
+}
+
+ion-item {
+  --border-style: none;
+  --padding-top:10px;
+  --padding-bottom:10px;
+}
+
+ion-item:hover {
+  --background:rgb(189, 189, 189);
+}
+
+ion-input {
+  --highlight-color-focused: none;
+}
+
+.searchForm {
+  width: 50px;
+  height: 45px;
+  background-color: rgb(226, 226, 226);
+  position: relative;
+  border-radius: 50px;
+  align-items: center;
+  -webkit-transition: width 0.3s ease-in-out;
+}
+
+.searchInput {
+  position: absolute;
+  width: 100%;
+  display: none;
+  border-radius: 20px;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  border-radius: 50%;
+  color: #3c88ec;
+  font-size: 20px;
+}
+
+.searchForm:hover ion-input {
+  display: block;
+  --padding-start: 20px;
+}
+
+.searchForm:hover {
+  width: 200px;
+}

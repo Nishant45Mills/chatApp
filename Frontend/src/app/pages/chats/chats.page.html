@@ -1,28 +1,57 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row class="ion-justify-content-center ion-margin-top">
-      <ion-col size="11" style="border: 1px solid red" style="display: flex;justify-content: space-between;align-items: center;">
+      <ion-col
+        size="11"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
         <div>
-          <ion-icon name="menu-outline" style="color: #3c88ec;font-size: 40px;"></ion-icon>
+          <ion-icon
+            name="menu-outline"
+            style="color: #3c88ec; font-size: 40px"
+          ></ion-icon>
         </div>
-
-            <ion-searchbar #search animated="true" placeholder="Search user" style="height: 30px;"></ion-searchbar>
-
+        <div>
+          <form action="" class="searchForm">
+            <ion-input
+              type="text"
+              placeholder="Search user"
+              class="searchInput"
+            ></ion-input>
+            <ion-icon name="search-outline" class="searchIcon"></ion-icon>
+          </form>
+        </div>
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row class="ion-justify-content-center ion-margin-top">
       <ion-col size="11">
-
         <ion-list class="ion-margin-top">
-          <ion-item>
+          <ion-item *ngFor="let data of chat">
             <ion-thumbnail slot="start">
-              <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
+              <ion-avatar>
+                <img
+                  alt="Silhouette of mountains"
+                  src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+                />
+              </ion-avatar>
             </ion-thumbnail>
-            <ion-label>Item</ion-label>
+            <ion-label
+              >
+              <h5>
+              {{data['isGroupChat']?data['chatName']:data['users'][1]['name']}}
+              </h5>
+              <p>whats'up bro</p>
+            </ion-label>
+
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-button color="danger" (click)="logOut()">remove token</ion-button>
 </ion-content>
