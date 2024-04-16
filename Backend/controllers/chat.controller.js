@@ -35,7 +35,7 @@ const createChat = catchAsync(async (req, res) => {
 
 const fetchChat = catchAsync(async (req, res) => {
   const fetchingChats = await chatModel
-    .findOne({ users: { $elemMatch: { $eq: req.user._id } } })
+    .find({ users: { $elemMatch: { $eq: req.user._id } } })
     .populate("users", "-password")
     .populate("groupAdmin", "-password")
     .populate("latestMessage");

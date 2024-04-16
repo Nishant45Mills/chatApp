@@ -7,11 +7,12 @@ import {
   ViewChild,
   viewChild,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AnimationController, IonSearchbar } from '@ionic/angular';
 import type { Animation } from '@ionic/angular';
 import { HttpService } from 'src/app/services/http.service';
 import { LocalService } from 'src/app/services/local.service';
+import { getCurrentUser } from 'src/app/config/chatLogic';
 
 @Component({
   selector: 'app-chats',
@@ -20,13 +21,19 @@ import { LocalService } from 'src/app/services/local.service';
 })
 export class ChatsPage implements OnInit, AfterViewInit {
   chat: any;
+  currentLogInUser: any;
+  searchUser = '';
 
   constructor(
     private http: HttpService,
     private animationController: AnimationController,
     private tokenService: LocalService,
-    private route: Router
-  ) {}
+    private route: Router,
+    private activatedRoute: ActivatedRoute,
+    private localService: LocalService
+  ) {
+    // this.currentLogInUser = localService.get('userId')
+  }
 
   ngOnInit() {
     this.fetchChats();
@@ -38,6 +45,7 @@ export class ChatsPage implements OnInit, AfterViewInit {
     this.http.get('/chat').subscribe({
       next: (data) => {
         this.chat = data;
+        console.log(this.chat);
       },
       error: (err) => {
         console.log(err);
@@ -49,8 +57,16 @@ export class ChatsPage implements OnInit, AfterViewInit {
     console.log('hello');
   }
 
+  getUser(user: any) {
+    return getCurrentUser(this.currentLogInUser, user);
+  }
+
+  printName() {
+    console.log(this.searchUser);
+  }
+
   logOut() {
     this.tokenService.remove();
-    this.route.navigate(['']);
+    this.route.navigateByUrl('');
   }
 }

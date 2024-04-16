@@ -21,6 +21,9 @@
               type="text"
               placeholder="Search user"
               class="searchInput"
+              [(ngModel)]="searchUser"
+              (keyup)="printName()"
+              name
             ></ion-input>
             <ion-icon name="search-outline" class="searchIcon"></ion-icon>
           </form>
@@ -40,18 +43,16 @@
                 />
               </ion-avatar>
             </ion-thumbnail>
-            <ion-label
-              >
+            <ion-label>
               <h5>
-              {{data['isGroupChat']?data['chatName']:data['users'][1]['name']}}
+                {{data['isGroupChat']?data['chatName']:getUser(data['users'])}}
               </h5>
               <p>whats'up bro</p>
             </ion-label>
-
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-button color="danger" (click)="logOut()">remove token</ion-button>
+  <ion-button color="danger" (click)="logOut()">logout</ion-button>
 </ion-content>
