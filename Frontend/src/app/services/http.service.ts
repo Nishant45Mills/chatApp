@@ -15,7 +15,7 @@ export class HttpService {
   }
 
   get(normalUrl: any) {    
-    const headers = { Authorization: `Bearer ${this.token.get()}` };
+    const headers = { Authorization: `Bearer ${this.token.get('token')}` };
     return this.http.get(`${this.baseUrl}${normalUrl}`, { headers });
   }
 }

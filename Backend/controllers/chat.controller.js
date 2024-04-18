@@ -42,6 +42,15 @@ const fetchChat = catchAsync(async (req, res) => {
   res.json(fetchingChats);
 });
 
+const getChatById = catchAsync(async (req, res) => {
+  const fetchingChats = await chatModel
+    .findById(req.params.id)
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password")
+    .populate("latestMessage");
+  res.json(fetchingChats);
+});
+
 const createGroupChat = catchAsync(async (req, res) => {
   const { chatName, user } = req.body;
 
@@ -111,4 +120,5 @@ module.exports = {
   renameGroup,
   removeFromGroup,
   addToGroup,
+  getChatById
 };

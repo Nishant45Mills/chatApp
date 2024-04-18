@@ -55,3 +55,12 @@ ion-input {
 .searchForm:hover {
   width: 290px;
 }
+
+ion-item {
+  --highlight-color-focused: none;
+}
+
+ion-input.ion-valid {
+
+  --highlight-color: none;
+}

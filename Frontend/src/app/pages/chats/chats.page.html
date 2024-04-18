@@ -22,8 +22,8 @@
               placeholder="Search user"
               class="searchInput"
               [(ngModel)]="searchUser"
-              (keyup)="printName()"
-              name
+              (keyup)="printName($event)"
+              name="searchUser"
             ></ion-input>
             <ion-icon name="search-outline" class="searchIcon"></ion-icon>
           </form>
@@ -34,25 +34,48 @@
     <ion-row class="ion-justify-content-center ion-margin-top">
       <ion-col size="11">
         <ion-list class="ion-margin-top">
-          <ion-item *ngFor="let data of chat">
-            <ion-thumbnail slot="start">
-              <ion-avatar>
-                <img
-                  alt="Silhouette of mountains"
-                  src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-                />
-              </ion-avatar>
-            </ion-thumbnail>
-            <ion-label>
-              <h5>
-                {{data['isGroupChat']?data['chatName']:getUser(data['users'])}}
-              </h5>
-              <p>whats'up bro</p>
-            </ion-label>
-          </ion-item>
+          <div *ngIf="!searchStatus">
+            <ion-item *ngFor="let data of chat" (click)="userProfile(data)">
+              <ion-thumbnail slot="start">
+                <ion-avatar>
+                  <img
+                    alt="Silhouette of mountains"
+                    src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+                  />
+                </ion-avatar>
+              </ion-thumbnail>
+              <ion-label>
+                <div>
+                  <h5>
+                    {{data['isGroupChat']?data['chatName']:getUser(data['users'])}}
+                  </h5>
+                </div>
+                <p>whats'up bro</p>
+              </ion-label>
+            </ion-item>
+          </div>
+
+          <div *ngIf="searchStatus">
+            <ion-item *ngFor="let data of searchChat">
+              <ion-thumbnail slot="start">
+                <ion-avatar>
+                  <img
+                    alt="Silhouette of mountains"
+                    src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+                  />
+                </ion-avatar>
+              </ion-thumbnail>
+              <ion-label>
+                <div>
+                  <h5>{{data['name']}}</h5>
+                </div>
+                <p>whats'up bro</p>
+              </ion-label>
+            </ion-item>
+          </div>
         </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-button color="danger" (click)="logOut()">logout</ion-button>
+  <!-- <ion-button color="danger" (click)="logOut()">logout</ion-button> -->
 </ion-content>

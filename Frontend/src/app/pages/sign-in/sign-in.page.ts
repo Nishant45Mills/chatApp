@@ -30,6 +30,7 @@ export class SignInPage implements OnInit {
     this.http.post('/auth/login', formData.value).subscribe({
       next: (data: any) => {
         this.tokenService.set('token', data['accessToken']);
+        this.tokenService.set('userId', data['user']['_id']);
         setTimeout(() => {
           this.loading = false;
           this.route.navigateByUrl('/chat');

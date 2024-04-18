@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.tokenService.get()) {
+    if (this.tokenService.get('token')) {
       this.myRoute.navigateByUrl('/chat');
       return false;
     } else {

@@ -23,6 +23,8 @@ export class ChatsPage implements OnInit, AfterViewInit {
   chat: any;
   currentLogInUser: any;
   searchUser = '';
+  searchStatus = false;
+  searchChat: any;
 
   constructor(
     private http: HttpService,
@@ -32,7 +34,7 @@ export class ChatsPage implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private localService: LocalService
   ) {
-    // this.currentLogInUser = localService.get('userId')
+    this.currentLogInUser = localService.get('userId');
   }
 
   ngOnInit() {
@@ -61,8 +63,26 @@ export class ChatsPage implements OnInit, AfterViewInit {
     return getCurrentUser(this.currentLogInUser, user);
   }
 
-  printName() {
-    console.log(this.searchUser);
+  printName(event: any) {
+    console.log();
+    if (event.target.value) {
+      this.searchStatus = true;
+      this.http.get(`/user?search=${this.searchUser}`).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.searchChat = data;
+        },
+      });
+    } else {
+      this.searchStatus = false;
+    }
+  }
+
+  userProfile(userChat:any) {
+
+    console.log(userChat);
+    this.route.navigate([`user-profile/${userChat['_id']}`])
+
   }
 
   logOut() {
