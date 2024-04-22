@@ -9,12 +9,12 @@
 
 ion-item {
   --border-style: none;
-  --padding-top:10px;
-  --padding-bottom:10px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
 }
 
 ion-item:hover {
-  --background:rgb(189, 189, 189);
+  --background: rgb(189, 189, 189);
 }
 
 ion-input {
@@ -53,7 +53,11 @@ ion-input {
 }
 
 .searchForm:hover {
-  width: 290px;
+  width: 200px;
+}
+
+.demo:hover ~ .searchForm {
+  display: none;
 }
 
 ion-item {
@@ -61,6 +65,5 @@ ion-item {
 }
 
 ion-input.ion-valid {
-
   --highlight-color: none;
 }

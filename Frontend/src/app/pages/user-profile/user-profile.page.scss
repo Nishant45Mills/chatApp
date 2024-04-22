@@ -1,0 +1,38 @@
+img {
+  width: 50px;
+  height: 50px;
+}
+
+ion-avatar {
+  display: flex;
+  justify-content: center;
+}
+
+.videoMargin {
+  margin-right: 20px;
+}
+
+ion-input {
+  --background: rgb(228, 228, 228);
+  --border-radius: 10px;
+  --padding-bottom: 10px;
+  --padding-top: 10px;
+  --padding-start: 10px;
+  --highlight-color-focused: none;
+}
+
+ion-col {
+  display: flex;
+//   justify-content: center;
+  align-items: center;
+}
+
+.footerBar {
+  position: relative;
+}
+
+.micStyle {
+  position: absolute;
+  right: 10px;
+  z-index: 3;
+}
