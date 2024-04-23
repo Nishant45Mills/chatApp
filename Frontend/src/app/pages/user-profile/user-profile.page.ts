@@ -19,14 +19,31 @@ export class UserProfilePage implements OnInit {
     private localService: LocalService
   ) {
     this.currentLogInUser = localService.get('userId');
+    console.log(this.currentLogInUser);
+    
   }
 
   ngOnInit() {
+    this.fetchUser();
+    this.fetchMessages();
+  }
+
+  fetchUser() {
     this.http
       .get(`/chat/${this.activatedRoute.snapshot.params['id']}`)
       .subscribe({
         next: (data) => {
           this.chat = data;
+        },
+      });
+  }
+
+  fetchMessages() {
+    this.http
+      .get(`/message/${this.activatedRoute.snapshot.params['id']}`)
+      .subscribe({
+        next: (data) => {
+          console.log(data);
         },
       });
   }

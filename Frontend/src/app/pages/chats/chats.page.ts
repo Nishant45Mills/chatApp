@@ -80,7 +80,6 @@ export class ChatsPage implements OnInit, AfterViewInit {
 
   userProfile(userChat:any) {
 
-    console.log(userChat);
     this.route.navigate([`user-profile/${userChat['_id']}`])
 
   }

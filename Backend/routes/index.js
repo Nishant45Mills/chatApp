@@ -3,6 +3,7 @@ const app = express();
 const authRoute = require("./auth.route");
 const userRoute = require("./user.route");
 const chatRoute = require("./chat.route");
+const messageRoute = require("./message.route");
 
 const routes = [
   {
@@ -17,6 +18,10 @@ const routes = [
     path: "/chat",
     route: chatRoute,
   },
+  {
+    path:'/message',
+    route:messageRoute
+  }
 ];
 
 routes.forEach((data) => {
