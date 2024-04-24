@@ -11,10 +11,11 @@ export class HttpService {
   constructor(private http: HttpClient, private token: LocalService) {}
 
   post(normalUrl: any, payload: any) {
-    return this.http.post(`${this.baseUrl}${normalUrl}`, payload);
+    const headers = { Authorization: `Bearer ${this.token.get('token')}` };
+    return this.http.post(`${this.baseUrl}${normalUrl}`, payload, { headers });
   }
 
-  get(normalUrl: any) {    
+  get(normalUrl: any) {
     const headers = { Authorization: `Bearer ${this.token.get('token')}` };
     return this.http.get(`${this.baseUrl}${normalUrl}`, { headers });
   }

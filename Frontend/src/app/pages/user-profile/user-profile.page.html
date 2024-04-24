@@ -40,18 +40,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true"> 
-<ion-item>
-  <ion-grid>
-    <ion-row>
-      <ion-col style="display: flex;justify-content:end;">
-        <div>
-          Hello nishant
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-item>
+<ion-content style="position: relative">
+  <div style="position: absolute; bottom: 0px; right: 0px; left: 0px">
+    <ion-item>
+      <ion-grid>
+        <ion-row *ngFor="let data of message">
+          <ion-col
+            [ngClass]="data['sender']['_id']==currentLogInUser ? 'loggedMessageStyle' : 'userMessageStyle'"
+          >
+            <div
+              class="paddingStyle"
+              [ngClass]="data['sender']['_id']==currentLogInUser ? 'styleMessage' : 'styleUserMessage'"
+            >
+              <div>{{data['content']}}</div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </div>
 </ion-content>
 
 <ion-footer>
@@ -64,7 +71,13 @@
         ></ion-icon>
       </ion-col>
       <ion-col size="10" class="footerBar">
-        <ion-input type="text" placeholder="Type here"></ion-input>
+        <ion-input
+          type="text"
+          placeholder="Type here"
+          [(ngModel)]="messageText"
+          name="messageText"
+          (keyup)="sendMessage($event)"
+        ></ion-input>
         <ion-icon
           name="mic-outline"
           class="micStyle"

@@ -13,6 +13,7 @@ import type { Animation } from '@ionic/angular';
 import { HttpService } from 'src/app/services/http.service';
 import { LocalService } from 'src/app/services/local.service';
 import { getCurrentUser } from 'src/app/config/chatLogic';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-chats',
@@ -25,6 +26,7 @@ export class ChatsPage implements OnInit, AfterViewInit {
   searchUser = '';
   searchStatus = false;
   searchChat: any;
+  chatListSpinner = true;
 
   constructor(
     private http: HttpService,
@@ -47,6 +49,7 @@ export class ChatsPage implements OnInit, AfterViewInit {
     this.http.get('/chat').subscribe({
       next: (data) => {
         this.chat = data;
+        this.chatListSpinner = false;
         console.log(this.chat);
       },
       error: (err) => {

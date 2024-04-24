@@ -12,6 +12,9 @@ import { LocalService } from 'src/app/services/local.service';
 export class UserProfilePage implements OnInit {
   chat: any;
   currentLogInUser: any;
+  message: any;
+  messageText = '';
+  chatId: any;
 
   constructor(
     private http: HttpService,
@@ -19,8 +22,7 @@ export class UserProfilePage implements OnInit {
     private localService: LocalService
   ) {
     this.currentLogInUser = localService.get('userId');
-    console.log(this.currentLogInUser);
-    
+    this.chatId = this.activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit() {
@@ -29,23 +31,34 @@ export class UserProfilePage implements OnInit {
   }
 
   fetchUser() {
-    this.http
-      .get(`/chat/${this.activatedRoute.snapshot.params['id']}`)
-      .subscribe({
-        next: (data) => {
-          this.chat = data;
-        },
-      });
+    this.http.get(`/chat/${this.chatId}`).subscribe({
+      next: (data) => {
+        this.chat = data;
+      },
+    });
   }
 
   fetchMessages() {
-    this.http
-      .get(`/message/${this.activatedRoute.snapshot.params['id']}`)
-      .subscribe({
+    this.http.get(`/message/${this.chatId}`).subscribe({
+      next: (data) => {
+        this.message = data;
+      },
+    });
+  }
+
+  sendMessage(event: any) {
+    if (event.key == 'Enter') {
+      let messagePayload = {
+        content: this.messageText,
+        chatId: this.chatId,
+      };
+      this.messageText = '';
+      this.http.post('/message', messagePayload).subscribe({
         next: (data) => {
-          console.log(data);
+          this.fetchMessages();
         },
       });
+    }
   }
 
   getUser(user: any) {

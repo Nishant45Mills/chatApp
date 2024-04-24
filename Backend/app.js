@@ -10,12 +10,7 @@ const app = express();
 
 app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: "http://localhost:8100",
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(bodyParser.json());
 

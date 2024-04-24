@@ -23,7 +23,6 @@ ion-input {
 
 ion-col {
   display: flex;
-//   justify-content: center;
   align-items: center;
 }
 
@@ -35,4 +34,43 @@ ion-col {
   position: absolute;
   right: 10px;
   z-index: 3;
+}
+
+ion-item {
+  --border-style: none;
+}
+
+ion-content::part(scroll) {
+  position: static;
+}
+
+.loggedMessageStyle {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.userMessageStyle {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+}
+
+.styleMessage {
+  background-color: rgb(53, 100, 255);
+  color: white;
+}
+
+.styleUserMessage {
+  background-color: rgb(236, 231, 231);
+  color: black;
+}
+
+.paddingStyle {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.ion-valid {
+  --highlight-color: none;
 }
