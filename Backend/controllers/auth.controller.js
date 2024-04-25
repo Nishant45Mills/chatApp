@@ -1,3 +1,4 @@
+const { user } = require(".");
 const userModel = require("../models/user.model");
 const { tokenService } = require("../services");
 const ApiError = require("../util/ApiError");
@@ -31,11 +32,9 @@ const register = catchAsync(async (req, res) => {
 const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const userExist = await userModel.findOne({ email });
-
   if (!userExist || !(await userExist.matchPassword(password))) {
     throw new ApiError("Incorrect email or password", 400);
   }
-
   const token = await tokenService.generateToken(userExist);
   userExist.password = undefined;
   res.json({ user: userExist, accessToken: token });

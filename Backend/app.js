@@ -5,18 +5,8 @@ const routes = require("./routes");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const errorHandler = require("./middlewares/errorHandle");
-require("dotenv").config();
-const app = express();
-const { createServer } = require("node:http");
-const { Server } = require("socket.io");
 
-const server = createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-    credentials: true,
-  },
-});
+const app = express();
 
 app.use(cookieParser());
 
@@ -28,9 +18,4 @@ app.use("/", routes);
 
 app.use(errorHandler);
 
-io.on("connection", (socket) => {
-  console.log("a user connected");
-  console.log(socket.id);
-});
-
-module.exports = server;
+module.exports = app;

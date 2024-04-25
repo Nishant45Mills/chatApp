@@ -25,7 +25,7 @@ export class SignInPage implements OnInit {
 
   ngOnInit() {}
 
-  submitLoginForm(formData: any) {
+  submitLoginForm(formData: any) {    
     this.loading = true;
     this.http.post('/auth/login', formData.value).subscribe({
       next: (data: any) => {
