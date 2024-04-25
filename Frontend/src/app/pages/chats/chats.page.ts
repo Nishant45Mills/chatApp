@@ -81,10 +81,8 @@ export class ChatsPage implements OnInit, AfterViewInit {
     }
   }
 
-  userProfile(userChat:any) {
-
-    this.route.navigate([`user-profile/${userChat['_id']}`])
-
+  userProfile(userChat: any) {
+    this.route.navigate([`user-profile/${userChat['_id']}`]);
   }
 
   logOut() {
